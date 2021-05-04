@@ -1,3 +1,4 @@
+// Selezione Semplice
 // Seleziona tutti gli ospiti che sono stati identificati con la carta di identità.
 
 SELECT *
@@ -69,27 +70,61 @@ FROM `stanze`
 
 
 
+// GROUP BY
+// Esercizio di test personale del Group By in t.stanze, conteggio stanze per piano
+
+SELECT COUNT(`beds`) AS 'letti_per_piano', `floor`
+FROM `stanze`
+GROUP BY `floor`
+
+
+
+// Conta gli ospiti raggruppandoli per anno di nascita
+
+SELECT YEAR(`date_of_birth`) AS 'anno', COUNT(`id`) AS 'clienti_per_anno'
+FROM `ospiti`
+GROUP BY YEAR(`date_of_birth`)
+
+
+
+// Somma i prezzi dei pagamenti raggruppandoli per status
+
+SELECT SUM(`price`) AS 'somma_pagamenti', `status` AS 'stato_pagamento'
+FROM `pagamenti`
+GROUP BY `status`
+
+
+
+// Conta quante volte è stata prenotata ogni stanza
+
+SELECT COUNT(`prenotazioni`.`id`), `prenotazioni`.`stanza_id`
+FROM `prenotazioni`
+GROUP BY `prenotazioni`.`stanza_id`
+
+
+
+// Fai una analisi per vedere se ci sono ore in cui le prenotazioni sono più frequenti
+
+SELECT HOUR(`created_at`) AS 'orario_prenotazione', COUNT(`id`) AS 'numero_prenotazioni_per_ora'
+FROM `prenotazioni`
+GROUP BY HOUR(`created_at`)
+ORDER BY COUNT(`id`) DESC
+
+
+
+// Quante prenotazioni ha fatto l’ospite che ha fatto più prenotazioni?
+
+SELECT COUNT(`id`) AS 'numero_prenotazioni', `ospite_id`
+FROM `prenotazioni_has_ospiti`
+GROUP BY `ospite_id`
+ORDER BY COUNT(`id`) DESC
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-GROUP BY
-•	Conta gli ospiti raggruppandoli per anno di nascita
-•	Somma i prezzi dei pagamenti raggruppandoli per status
-•	Conta quante volte è stata prenotata ogni stanza
-•	Fai una analisi per vedere se ci sono ore in cui le prenotazioni sono più frequenti
-•	Quante prenotazioni ha fatto l’ospite che ha fatto più prenotazioni?
+	
 
 JOIN
 •	Come si chiamano gli ospiti che hanno fatto più di due prenotazioni?
