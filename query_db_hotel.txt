@@ -80,7 +80,9 @@ FROM `stanze`
 
 
 
-•	
+
+
+
 
 GROUP BY
 •	Conta gli ospiti raggruppandoli per anno di nascita
